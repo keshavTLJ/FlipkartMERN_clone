@@ -1,0 +1,96 @@
+*{
+    font-family: Roboto,Arial,sans-serif;
+}
+
+.footermain{
+    width:100% ;
+    height: inherit;
+    background-color: #172337;
+}
+
+.footermain tr:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.upperfootersub{
+    /* border: 2px solid rgb(47, 151, 255); */
+    width:94% ;
+    margin: 2% 3%;
+    /* border-bottom: 1px solid #f7f7f794; */
+    display: flex;
+   
+
+}
+.divhr{
+    border-bottom: 1px solid #ffffff2d;
+    width: 100%;
+    
+}
+
+.lowerfootersub{
+    /* border: 2px solid rgb(255, 47, 47); */
+    width:90% ;
+    margin: 1% 0%;
+    
+}
+
+.upperfootersubleft{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    border-right:1px solid #ffffff2d; ;
+    justify-content: space-evenly;
+}
+
+.upperfootersubleft thead{
+    color:#72746e;
+}
+.upperfootersubright thead{
+    color:#72746e;
+}
+
+
+.upperfootersubright{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    justify-content: space-evenly;
+    
+
+}
+.upperfootersubright > table{
+    text-align: left;
+    font-size: 12px;
+    color: white;
+    width: 40%;
+    margin: 1% 5%;
+    line-height: 18px;
+
+}
+
+.upperfootersubright > table > tr{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    
+}
+
+.upperfootersubleft > table{
+    text-align: left;
+    font-size: 12px;
+    color: white;
+    width: 25%;
+    margin: 1%;
+    line-height: 2;
+}
+.upperfootersubleft :nth-child(4){
+    width: 15%;
+  
+}
+
+.upperfootersubleft>div>tr{
+
+}
