@@ -71,7 +71,7 @@ const Header = () => {
   }
 
   const debouncedSuggest = useCallback(
-    debounce(getSuggestedProducts, 400),
+    debounce(getSuggestedProducts, 300),
   []);
 
   const handleChange = (e) => {

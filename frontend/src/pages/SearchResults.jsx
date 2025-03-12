@@ -140,7 +140,7 @@ const SearchResults = () => {
             </div>
           }
         </div>
-        <div className="grid grid-cols-4 gap-2 items-start border-b-[1px] min-h-[calc(100vh-12rem)]">
+        <div className="grid grid-cols-4 gap-2 items-start border-b-[1px] min-h-[calc(100vh-12.5rem)]">
           {productData?.products?.length > 0 &&
             productData?.products?.map((product, index) => (
               <Link
