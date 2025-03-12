@@ -682,11 +682,7 @@ function Checkout() {
                                 {!addressAddUpdateLoading ? (
                                   "SAVE AND DELIVER HERE"
                                 ) : (
-                                  <Loader
-                                    width="20px"
-                                    height="20px"
-                                    borderWidth="3px"
-                                  />
+                                  <Loader size="20px" borderWidth="3px" />
                                 )}
                               </button>
                               {!addressAddUpdateLoading && (
@@ -918,11 +914,7 @@ function Checkout() {
                               {!addressAddUpdateLoading ? (
                                 "SAVE AND DELIVER HERE"
                               ) : (
-                                <Loader
-                                  width="20px"
-                                  height="20px"
-                                  borderWidth="3px"
-                                />
+                                <Loader size="20px" borderWidth="3px" />
                               )}
                             </button>
                             {!addressAddUpdateLoading && (

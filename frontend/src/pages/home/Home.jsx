@@ -108,7 +108,7 @@ const Home = () => {
             ))}
           </>
           ) : (
-          <Loader width="40px" height="40px" style={{ marginTop: "20px" }} />
+          <Loader size="40px" style={{ marginTop: "20px" }} />
         )}
         <Footer />
       </div>

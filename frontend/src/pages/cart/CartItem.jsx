@@ -71,7 +71,7 @@ const CartItem = ({ item, checkoutUpdateQuantity, checkoutHandleDelete, checkout
           </button>
         </div>
         <button disabled={deleteLoading} onClick={() => handleDeleteProduct(product)} className={`w-24 h-8 ml-4 py-1 border-[1px] border-red-500 text-black rounded-lg ${!deleteLoading && 'hover:bg-red-500'} hover:text-white`}>
-          {deleteLoading ? <Loader width='15px' height='15px' borderWidth='2px' /> : 'Remove'}
+          {deleteLoading ? <Loader size='15px' borderWidth='2px' /> : 'Remove'}
         </button>
       </div>
     </div>

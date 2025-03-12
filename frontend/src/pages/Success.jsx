@@ -68,7 +68,7 @@ function Success() {
     }
   }, [countdown, navigate, order]);
 
-  if (loading) return <Loader width='50px' height='50px' borderWidth='4px' style={{ marginTop: "240px" }} />;
+  if (loading) return <Loader size='50px' borderWidth='4px' style={{ marginTop: "240px" }} />;
   if (error) return <p>{error}</p>;
 
   return order && order.paymentStatus === "paid" ? (

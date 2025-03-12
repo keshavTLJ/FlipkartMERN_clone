@@ -116,7 +116,7 @@ const Login = () => {
                         </span>
                     </div>
                     <p className='text-gray-500 text-xs mt-8'>By continuing, you agree to Flipkart's <span className='text-blue-500'>Terms of Use</span> and <span className='text-blue-500'>Privacy Policy</span>.</p>
-                    <button className={`${loading ? 'bg-[#ca7d57]' : 'bg-[#FB641B]'} text-white w-full rounded-sm h-12 mt-4 ${error ? 'animate-shake' : ''}`}>{loading ? <span className='flex flex-row justify-center'>Logging in... <Loader width='20px' height='20px' /></span> : 'Login'}</button>
+                    <button className={`${loading ? 'bg-[#ca7d57]' : 'bg-[#FB641B]'} text-white w-full rounded-sm h-12 mt-4 ${error ? 'animate-shake' : ''}`}>{loading ? <span className='flex flex-row justify-center'>Logging in... <Loader size='20px' /></span> : 'Login'}</button>
                     {/* <p className='mt-2 mb-2'>OR</p> */}
                     {/* <button className='text-blue-500 w-full rounded-sm h-12 shadow-[0_2px_4px_0px_rgba(0,0,0,0.2)]'>Request OTP</button> */}
                     {error ? <div className={`text-red-500 text-center mt-2 ${error ? 'animate-shake' : ''}`}>

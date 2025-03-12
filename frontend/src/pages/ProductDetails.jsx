@@ -88,7 +88,7 @@ const ProductDetails = () => {
                                                 cartProductIds.some(id => product?._id === id);
 
     if(loading)
-        return <Loader width='50px' height='50px' style={{ marginTop: "240px" }} />
+        return <Loader size='50px' style={{ marginTop: "240px" }} />
         
   return (
     <div className='bg-gray-200'>
@@ -99,7 +99,7 @@ const ProductDetails = () => {
                     <img src={product?.url} alt="" className='w-full h-full object-contain' />
                     <span onClick={handleClick} className='absolute right-4 top-2 h-9 w-9 rounded-full shadow flex flex-row justify-center items-center cursor-pointer'>
                         {wishlistLoading ? 
-                            <Loader width='16px' height='16px' borderWidth='3px' />
+                            <Loader size='16px' borderWidth='3px' />
                             : 
                             <AiFillHeart className={`${presentInWishlist ? 'text-red-400' : 'text-black/20'} text-2xl hover:text-red-400`} />
                         }
@@ -117,7 +117,7 @@ const ProductDetails = () => {
                               </path>
                             </svg>
                         </span>
-                        {cartLoading ? <Loader width='20px' height='20px' borderWidth = "3px" /> : 'ADD TO CART'}</button>)
+                        {cartLoading ? <Loader size='20px' borderWidth = "3px" /> : 'ADD TO CART'}</button>)
                         :
                         <Link to='/cart' className='text-[#eda831] text-lg outline outline-[2px] outline-[#eda831] flex flex-row gap-2 w-1/2 h-[52px] items-center justify-center rounded-sm font-semibold transition-all duration-300 hover:shadow-lg'>Go To Cart</Link>
                     }

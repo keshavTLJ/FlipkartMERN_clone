@@ -60,7 +60,7 @@ function DeleteAccountModal() {
             }}
             className={`w-24 px-6 py-2 ${loading ? 'outline outline-2 outline-red-500' : 'bg-red-500'} text-white font-medium rounded-sm`}
           >
-            {loading ? <Loader width='15px' height='15px' borderWidth='2px' /> : 'Delete'}
+            {loading ? <Loader size='15px' borderWidth='2px' /> : 'Delete'}
           </button>
         </div>
       </div>

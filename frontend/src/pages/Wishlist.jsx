@@ -38,8 +38,8 @@ const Wishlist = () => {
     }
   }, [authLoading, currentUser?.name]);
 
-  if (loading && authLoading) {
-    return <Loader width="50px" height="50px" style={{ marginTop: "240px" }} />;
+  if (loading) {
+    return <Loader size="50px" style={{ marginTop: "240px" }} />;
   }
 
   return (

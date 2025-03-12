@@ -10,6 +10,7 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
 
   const { setShowDeleteAccountModal } = useModal();
 
+  const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [profileFormData, setProfileFormData] = useState({
     name: "",
@@ -28,9 +29,7 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
     e.preventDefault();
     // console.log(profileFormData);
     try {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("No authentication token found");
-
+      setLoading(true);
       const res = await apiRequest({
         method: 'patch',
         url: `${import.meta.env.VITE_SERVER_URL}/account`,
@@ -43,6 +42,8 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
     } catch (error) {
       console.log(error);
       toast.error("Failed to update user details!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +61,7 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
   }, [userData]);
 
   if (userDataLoading) {
-    return <Loader width="50px" height="50px" style={{ marginTop: "240px" }} />;
+    return <Loader size="50px" style={{ marginTop: "240px" }} />;
   }
 
   return (
@@ -177,10 +178,18 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
             <div className="flex space-x-4">
               <button
                 type="submit"
-                className="px-12 py-3 bg-blue-500 text-white font-medium rounded-sm"
+                className={`${loading ? "outline outline-2 outline-[#2874f0]" : "bg-[#2874f0]"} 
+                px-12 py-3 text-white font-medium rounded-sm`}
               >
-                SAVE
+                {!loading ? ("SAVE") 
+                  : (
+                  <Loader
+                    size="20px"
+                    borderWidth="2px"
+                  />
+                )}
               </button>
+              {!loading && (
               <button
                 type="button"
                 onClick={() => {
@@ -191,6 +200,7 @@ function PersonalInfo({ userData, setUserData, userDataLoading }) {
               >
                 Cancel
               </button>
+              )}
             </div>
           )}
         </form>

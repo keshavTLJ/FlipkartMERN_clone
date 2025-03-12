@@ -111,8 +111,6 @@ function ManageAddresses() {
   const handleSubmitForEditAddress = async (e, addressId) => {
     e.preventDefault();
     // console.log("Form Submitted", formData, addressId);
-    const token = localStorage.getItem("token");
-    if(!token) return;
     try {
       setAddressAddUpdateLoading(true);
       const res = await apiRequest({
@@ -181,7 +179,7 @@ function ManageAddresses() {
   }, [currentUser.name])
 
   if (loading) {
-    return <Loader width='50px' height='50px' style={{ marginTop: "240px" }} />
+    return <Loader size='50px' style={{ marginTop: "240px" }} />
   }
 
   return (
@@ -383,11 +381,7 @@ function ManageAddresses() {
               >
                 {!addressAddUpdateLoading ? ("SAVE") 
                   : (
-                  <Loader
-                    width="20px"
-                    height="20px"
-                    borderWidth="3px"
-                  />
+                  <Loader size="20px" borderWidth="3px" />
                 )}
               </button>
               {!addressAddUpdateLoading && (
@@ -613,17 +607,12 @@ function ManageAddresses() {
                   <div className="col-span-2 flex gap-9 mt-3">
                     <button
                       disabled={addressAddUpdateLoading}
-                      className={`${
-                        addressAddUpdateLoading ? "outline outline-2 outline-[#2874f0]" : "bg-[#2874f0]"} 
+                      className={`${addressAddUpdateLoading ? "outline outline-2 outline-[#2874f0]" : "bg-[#2874f0]"} 
                         text-white text-sm py-[14px] w-[15.5rem] font-semibold rounded-sm`}
                     >
                       {!addressAddUpdateLoading ? ("SAVE") 
                         : (
-                        <Loader
-                          width="20px"
-                          height="20px"
-                          borderWidth="3px"
-                        />
+                        <Loader size="20px" borderWidth="3px" />
                       )}
                     </button>
                     {!addressAddUpdateLoading && (

@@ -49,7 +49,7 @@ function Orders() {
   
     return (
       loading 
-      ? <Loader width='50px' height='50px' style={{ marginTop: "240px" }} /> 
+      ? <Loader size='50px' style={{ marginTop: "240px" }} /> 
         :
       <div className="flex">
         {visibleImages.map((img, index) => (
@@ -93,7 +93,7 @@ function Orders() {
 
   if (loading) {
     return (
-      <Loader width='50px' height='50px' style={{ marginTop: "240px" }} />
+      <Loader size='50px' style={{ marginTop: "240px" }} />
     );
   }
 

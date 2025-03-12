@@ -82,7 +82,7 @@ const SearchResults = () => {
 
 
   if(loading) {
-    return <Loader width='50px' height='50px' borderWidth='4px' style={{ marginTop: "240px" }} />
+    return <Loader size='50px' borderWidth='4px' style={{ marginTop: "240px" }} />
   }
 
   return (
