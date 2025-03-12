@@ -82,7 +82,7 @@ async function getProductById(req, res) {
   if(!product)
     return res.status(404).json({ error: 'Product Not Found!' })
 
-  res.status(200).json(product)
+  res.status(200).json([product])
 }
 
 async function searchProducts(req, res) {
