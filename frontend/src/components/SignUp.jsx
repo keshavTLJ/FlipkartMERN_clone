@@ -92,7 +92,7 @@ const SignUp = ({toggleSignUp, setToggleSignUp}) => {
                         </span>
                     </div>
                     <p className='text-gray-500 text-xs mt-8'>By continuing, you agree to Flipkart's <span className='text-blue-500'>Terms of Use</span> and <span className='text-blue-500'>Privacy Policy</span>.</p>
-                    <button className={`${loading ? 'bg-[#ca7d57]' : 'bg-[#FB641B]'} ${error ? 'animate-shake' : ''} text-white w-full rounded-sm h-12 mt-3`}>{loading ? <span className='flex flex-row justify-center'>'Signing up...' <Loader size='20px' /></span> : 'Continue'}</button>
+                    <button className={`${loading ? 'bg-[#ca7d57]' : 'bg-[#FB641B]'} ${error ? 'animate-shake' : ''} text-white w-full rounded-sm h-12 mt-3`}>{loading ? <span className='flex flex-row justify-center'>Signing up...<Loader size='20px' /></span> : 'Continue'}</button>
                     <button onClick={(e) => {e.preventDefault(); setToggleSignUp(false);}} className='text-blue-500 w-full rounded-sm h-12 shadow-[0_2px_4px_0px_rgba(0,0,0,0.2)] mt-4'>Existing User? Log in</button>
                     <div className={`text-red-500 mt-3 text-center ${error ? 'animate-shake' : ''}`}>
                         {error}

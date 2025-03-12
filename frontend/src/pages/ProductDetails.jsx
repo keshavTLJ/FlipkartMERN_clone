@@ -67,7 +67,7 @@ const ProductDetails = () => {
           try {
               const url = `${import.meta.env.VITE_SERVER_URL}/products/` + id;
               const res = await apiRequest({ method: 'get', url: url }, false);
-              setProduct(res?.data);
+              setProduct(res?.data[0]);
           } catch (error) {
               console.log(error);
               toast.error("Error fetching data!")

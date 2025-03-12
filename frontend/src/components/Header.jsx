@@ -125,13 +125,13 @@ const Header = () => {
   // To navigate the suggested products using arrow keys
   const handleKeyDown = (e) => {
     // console.log(e.key)
-    if (!suggestedProducts.length) return;
+    if (!suggestedProducts?.length) return;
 
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault(); // Prevent cursor from moving in input
         setActiveIndex(activeIndex => {
-          const newIndex = activeIndex < suggestedProducts.length-1 ? activeIndex+1 : 0;
+          const newIndex = activeIndex < suggestedProducts?.length-1 ? activeIndex+1 : 0;
           setInput(suggestedProducts[newIndex].name);
           return newIndex;
         });
@@ -140,7 +140,7 @@ const Header = () => {
       case 'ArrowUp':
         e.preventDefault(); // Prevent cursor from moving in input
         setActiveIndex(activeIndex => {
-          const newIndex = activeIndex > 0 ? activeIndex-1 : suggestedProducts.length-1;
+          const newIndex = activeIndex > 0 ? activeIndex-1 : suggestedProducts?.length-1;
           setInput(suggestedProducts[newIndex].name);
           return newIndex;
         });

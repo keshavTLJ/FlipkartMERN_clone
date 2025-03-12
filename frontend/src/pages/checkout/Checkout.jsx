@@ -109,10 +109,7 @@ function Checkout() {
     (acc, item) => acc + item.product.originalprice * item.quantity,
     0
   );
-  const totalCost = cartItems?.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
-    0
-  );
+  const totalCost = cartItems?.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const totalDiscount = totalMrp - totalCost;
 
   // Handle selecting an address
@@ -323,7 +320,7 @@ function Checkout() {
       try {
         setFetchDataLoading(true);
         // const token = localStorage.getItem("token");
-        const [addressData, cartData] = await axios.all([
+        const [addressRes, cartRes] = await axios.all([
           apiRequest({
             method: "get",
             url: `${import.meta.env.VITE_SERVER_URL}/user-address`,
@@ -338,26 +335,26 @@ function Checkout() {
                 url: `${import.meta.env.VITE_SERVER_URL}/cart`,
               }),
         ]);
-        if(!cartData?.data.length) {
+        if(!cartRes?.data?.length) {
           navigate('/');
           toast.error('Cart is empty!')
           return;
         }
-        if(!addressData?.data?.addresses.length) {
+        if(!addressRes?.data?.addresses.length) {
           toast('Please add an address to continue', {
             style: { backgroundColor: '#fc9517' }
           });
           setShowAddressForm(true);
         }
-        // console.log(addressData?.data, cartData?.data);
-        setAddressList(addressData?.data.addresses);
+        // console.log(addressRes?.data, cartRes?.data);
+        setAddressList(addressRes?.data.addresses);
         if (buyNow) {
-          // console.log([{ product: cartData?.data, quantity: 1 }]);
-          setCartItems([{ product: cartData?.data, quantity: 1 }]);
+          // console.log([{ product: cartRes?.data, quantity: 1 }]);
+          setCartItems([{ product: cartRes?.data[0], quantity: 1 }]);
         } 
         else 
-          setCartItems(cartData?.data);
-        setSelectedAddressId(addressData?.data.addresses[0]._id);
+          setCartItems(cartRes?.data);
+        setSelectedAddressId(addressRes?.data.addresses[0]._id);
       } catch (error) {
         console.log(error);
       } finally {
@@ -369,13 +366,13 @@ function Checkout() {
       if (currentUser?.name) {
         if (productId) 
           getCheckoutData(true);
-        else getCheckoutData();
+        else 
+          getCheckoutData();
 
         setShowStripePaymentInfoModal("NOT_VIEWED");
       } else {
         navigate("/");
         toast.error("Login required");
-        // setShowStripePaymentInfoModal('VIEWED');
       }
     }
 
@@ -387,7 +384,7 @@ function Checkout() {
     // }
 
     window.scrollTo({ top: 0 });
-  }, [authLoading, currentUser.name]);
+  }, [authLoading, currentUser?.name]);
 
   const editFormNameRef = useRef(null);
   const nameRef = useRef(null);
