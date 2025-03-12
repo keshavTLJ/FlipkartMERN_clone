@@ -71,7 +71,7 @@ const Header = () => {
   }
 
   const debouncedSuggest = useCallback(
-    debounce(getSuggestedProducts, 300),
+    debounce(getSuggestedProducts, 150),
   []);
 
   const handleChange = (e) => {
@@ -228,7 +228,7 @@ const Header = () => {
               ref={inputRef} 
               type="text" 
               value={input} 
-              onChange={handleChange}        //suggestProducts api hit on keystroke
+              onChange={handleChange}        //debounced suggestProducts api hit on keystroke
               onKeyUp={searchQueryHandler}   //for pressing enter and search icon click
               onKeyDown={handleKeyDown}      //for navigating suggested products with keyboard
               onFocus={handleFocus} 
