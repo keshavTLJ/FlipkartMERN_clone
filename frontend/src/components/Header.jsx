@@ -21,19 +21,19 @@ const Header = () => {
   const wishlistLength = useSelector(state => state.wishlist?.wishlistProductIds?.length);
   const cartLength = useSelector(state => state.cart?.cartProductIds?.length);
 
-  const [input, setInput] = useState("")
-  const [suggestedProducts, setSuggestedProducts] = useState([])
-  const inputRef = useRef()
-  const location  = useLocation()
+  const [input, setInput] = useState("");
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const inputRef = useRef();
+  const location  = useLocation();
   const [activeIndex, setActiveIndex] = useState(-1);
-  const navigate  = useNavigate()
+  const navigate  = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const query = searchParams.get('q');
   
   // GET suggested products on input change
-  const getSuggestedProducts = async (value) => {
+  const getSuggestedProducts = async (value, signal) => {
     
     // const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/suggest`, { query: trimmedValue });
     try {
@@ -41,7 +41,8 @@ const Header = () => {
       const res = await apiRequest({ 
       method: 'post', 
       url: '/suggest', 
-      data 
+      data,
+      signal
     }, false);
     // console.log(res?.data);
     setSuggestedProducts(res?.data)
@@ -54,17 +55,26 @@ const Header = () => {
 
   function debounce(func, delay) {
     let timeoutId;
+    let abortController;
 
     const debouncedFunction = function (...args) {
       clearTimeout(timeoutId);
+
+      if(abortController)
+        abortController.abort();
+
+      abortController = new AbortController();
+
       timeoutId = setTimeout(() => {
-          func(...args);
+        func(...args, abortController.signal);
       }, delay);
     };
 
-    // Add a cancel method to the debounced function
+    // cancel method to the debounced function
     debouncedFunction.cancel = () => {
       clearTimeout(timeoutId);
+      if(abortController)
+        abortController.abort();
     };
 
     return debouncedFunction;
@@ -99,19 +109,14 @@ const Header = () => {
       setSuggestedProducts([]);
   };
 
-  // Navigating to searchResults page on ENTER or SEARCH button clicked
+  // Navigating to searchResults page on ENTER or SEARCH button click
   const searchQueryHandler = (e) => {
     // console.log(e)
     if((e?.key === "Enter" || e === "searchButton") && input?.trim() !== "" && input !== decodeURIComponent(query))
       {
-        navigate(`/search?q=${encodeURIComponent(input)}&sortby=popularity&order=1&page=1`);
         debouncedSuggest.cancel();
-        setTimeout(() => {
-          setSuggestedProducts([]);
-          inputRef.current.blur();
-        }, 150);
-        // setSuggestedProducts([]);
-        // inputRef.current.blur();
+        navigate(`/search?q=${encodeURIComponent(input)}&sortby=popularity&order=1&page=1`);
+        inputRef.current.blur();
       }
       else
         return;
@@ -161,13 +166,15 @@ const Header = () => {
 
   // Clear the filtered data when clicked outside the input
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    function handleClickOutside(e) {
       if (e.target.tagName !== 'INPUT' && e.target.parentNode.tagName !== 'A') {
+        debouncedSuggest.cancel();
         setSuggestedProducts([]);
+        inputRef.current.blur();
       }
     };
 
-    if(suggestedProducts.length) {
+    if(suggestedProducts?.length) {
       document.addEventListener('click', handleClickOutside);
     }
     setActiveIndex(-1);
@@ -179,6 +186,7 @@ const Header = () => {
 
   //clearing the input when on homepage and category page
   useEffect(() => {
+
     if(location.pathname.slice(1).split('/')[0] === 'search') {
       setInput(decodeURIComponent(query));
       inputRef.current.blur();
@@ -186,10 +194,16 @@ const Header = () => {
     else {
       setInput("")
       debouncedSuggest.cancel();
-      setSuggestedProducts([]);
     }
-  
+    setSuggestedProducts([]);
+
   }, [location])
+
+  useEffect(() => {
+    return () => {
+      debouncedSuggest.cancel();
+    };
+  }, []);
   
   const handleLogout = () => {
     dispatch(removeUser("logout"));
@@ -240,7 +254,7 @@ const Header = () => {
               className="w-[36vw] h-9 placeholder-black/60 pl-4 focus:outline-none shadow-md rounded-sm focus:border-b-[1px]"
               aria-label="Search for products, brands and more"
               aria-haspopup="listbox"
-              aria-expanded={suggestedProducts.length > 0}
+              aria-expanded={suggestedProducts?.length > 0}
               />
               <button onClick={() => searchQueryHandler("searchButton")} className="absolute right-3 top-3">
                 <svg
@@ -262,10 +276,10 @@ const Header = () => {
                   </g>
                 </svg>
               </button>
-              {suggestedProducts.length > 0 && 
+              {suggestedProducts?.length > 0 && 
                 <ul className='absolute flex flex-col gap-1 bg-white w-[36vw] shadow-lg'>
                   {
-                    suggestedProducts.map((product, index) => 
+                    suggestedProducts?.map((product, index) => 
                       <li 
                         key={index} 
                         className={`${index === activeIndex ? 'bg-blue-50': ''} h-14`}

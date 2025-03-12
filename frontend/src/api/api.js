@@ -25,10 +25,17 @@ export const apiRequest = async (config = {}, requiresAuth = true) => {
       authHead = { Authorization: `Bearer ${token}` };
     }
     
-    const res = await api({ ...config, headers: authHead });
+    const res = await api({ 
+      ...config, 
+      headers: authHead,
+      signal: config.signal
+    });
+
     return res;
   } catch (error) {
-    console.log(error);
-    throw error;
+    if (error.name !== 'CanceledError' && error.name !== 'AbortError') {
+      console.log(error);
+      throw error;
+    }
   }
 };
