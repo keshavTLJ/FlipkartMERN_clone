@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Login from './Login'
 import { AiOutlineClose } from 'react-icons/ai'
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useDispatch, useSelector } from 'react-redux'
@@ -51,6 +50,7 @@ const SignUp = ({toggleSignUp, setToggleSignUp}) => {
     const nameRef = useRef()
     useEffect(() => {
         nameRef.current.focus()
+        dispatch(setError(null));
     }, [])
     
   return (

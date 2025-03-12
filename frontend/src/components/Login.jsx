@@ -53,6 +53,7 @@ const Login = () => {
     useEffect(() => {
         if(loginModal && !toggleSignUp) {
             setInput({ email: '', password: '' });
+            dispatch(setError(null));
             emailRef?.current.focus();
         }
     }, [loginModal, toggleSignUp]);
