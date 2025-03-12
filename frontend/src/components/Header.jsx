@@ -106,8 +106,12 @@ const Header = () => {
       {
         navigate(`/search?q=${encodeURIComponent(input)}&sortby=popularity&order=1&page=1`);
         debouncedSuggest.cancel();
-        setSuggestedProducts([]);
-        inputRef.current.blur();
+        setTimeout(() => {
+          setSuggestedProducts([]);
+          inputRef.current.blur();
+        }, 150);
+        // setSuggestedProducts([]);
+        // inputRef.current.blur();
       }
       else
         return;
