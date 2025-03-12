@@ -2,6 +2,9 @@
 
 A full-stack e-commerce web application that replicates core features of Flipkart, built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
 
+## Live Demo
+🚀 [View Live Demo](https://flipkart-mern-clone.vercel.app)
+
 ## Features
 
 ### Authentication & User Management
